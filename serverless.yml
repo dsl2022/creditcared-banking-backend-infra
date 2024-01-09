@@ -1,0 +1,20 @@
+service: lambda-packaging
+
+provider:
+  name: aws
+  runtime: nodejs16.x  # Ensure this is the runtime version you want
+
+plugins:
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'  # Path to webpack config
+    includeModules: true  # If you want to bundle node_modules
+
+package:
+  individually: true
+
+functions:
+  myLambdaFunction:
+    handler: src/common/index.handler  # Points to the handler in common/index.js
