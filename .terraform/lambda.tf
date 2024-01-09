@@ -9,7 +9,7 @@ resource "aws_lambda_function" "ddb_stream_processor" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name = "lambda_common_role"
+  name = "lambda_common_resolver_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
