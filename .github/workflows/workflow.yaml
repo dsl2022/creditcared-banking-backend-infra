@@ -19,16 +19,21 @@ on:
         default: "terraform-backend-ddb"
         type: string
       aws_account_id:
-        description: AWS Account ID
+        description: "212612999379"
         type: string
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     permissions:
       id-token: write
       contents: read
+
+    env:
+      AWS_REGION: ${{ github.event.inputs.aws_region || 'us-east-1' }}
+      BACKEND_S3_BUCKET: ${{ github.event.inputs.backend_s3_bucket || '2024-terraform-backend' }}
+      BACKEND_DYNAMODB_TABLE: ${{ github.event.inputs.backend_dynamodb_table || 'terraform-backend-ddb' }}
+      AWS_ACCOUNT_ID: ${{ github.event.inputs.aws_account_id }}
 
     steps:
       - uses: actions/checkout@v3
@@ -36,23 +41,23 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::${{ inputs.aws_account_id }}:role/github-actions-dsl
-          aws-region: ${{ inputs.aws_region }}
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github-actions-dsl
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_wrapper: false          
+          terraform_wrapper: false
 
       - name: Terraform Init
         shell: bash
         run: |
           set -eux
           terraform init -upgrade -reconfigure \
-            -backend-config='region=${{ inputs.aws_region }}' \
-            -backend-config='bucket=${{ inputs.backend_s3_bucket }}' \
+            -backend-config='region=${{ env.AWS_REGION }}' \
+            -backend-config='bucket=${{ env.BACKEND_S3_BUCKET }}' \
             -backend-config='key=appsync-project/terraform.tfstate' \
-            -backend-config='dynamodb_table=${{ inputs.backend_dynamodb_table }}'
+            -backend-config='dynamodb_table=${{ env.BACKEND_DYNAMODB_TABLE }}'
         working-directory: .terraform
 
       - name: Terraform Apply
