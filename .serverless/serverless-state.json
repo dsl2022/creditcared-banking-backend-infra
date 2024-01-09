@@ -174,7 +174,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/lambda-packaging/dev/1704776704478-2024-01-09T05:05:04.478Z/myLambdaFunction.zip"
+                "S3Key": "serverless/lambda-packaging/dev/1704817743383-2024-01-09T16:29:03.383Z/myLambdaFunction.zip"
               },
               "Handler": "src/common/index.handler",
               "Runtime": "nodejs16.x",
@@ -192,14 +192,14 @@
               "MyLambdaFunctionLogGroup"
             ]
           },
-          "MyLambdaFunctionLambdaVersioniik8CgcKs3JcaLntV3Nr0wP7gvsL0Obm9qld3khSab0": {
+          "MyLambdaFunctionLambdaVersionP9O05dJ3m0MCACH5An1sXnt5emutQGVvotuM6lHY5M": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "MyLambdaFunctionLambdaFunction"
               },
-              "CodeSha256": "0cQXo6DGLb7tFsilEpSJVFBrSAcTYP5mrFAQSpvOXvs="
+              "CodeSha256": "ipzmBKbPhomJRX6wVqyhz5hj6PZgdsdEL8lNzmoTzO8="
             }
           }
         },
@@ -215,7 +215,7 @@
           "MyLambdaFunctionLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "MyLambdaFunctionLambdaVersioniik8CgcKs3JcaLntV3Nr0wP7gvsL0Obm9qld3khSab0"
+              "Ref": "MyLambdaFunctionLambdaVersionP9O05dJ3m0MCACH5An1sXnt5emutQGVvotuM6lHY5M"
             },
             "Export": {
               "Name": "sls-lambda-packaging-dev-MyLambdaFunctionLambdaFunctionQualifiedArn"
@@ -329,7 +329,7 @@
         "timeout": 6,
         "runtime": "nodejs16.x",
         "vpc": {},
-        "versionLogicalId": "MyLambdaFunctionLambdaVersioniik8CgcKs3JcaLntV3Nr0wP7gvsL0Obm9qld3khSab0"
+        "versionLogicalId": "MyLambdaFunctionLambdaVersionP9O05dJ3m0MCACH5An1sXnt5emutQGVvotuM6lHY5M"
       }
     },
     "configValidationMode": "warn",
@@ -348,7 +348,7 @@
       "package": {
         "individually": true,
         "artifactsS3KeyDirname": "serverless/lambda-packaging/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/lambda-packaging/dev/1704776704478-2024-01-09T05:05:04.478Z"
+        "artifactDirectoryName": "serverless/lambda-packaging/dev/1704817743383-2024-01-09T16:29:03.383Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -359,7 +359,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/lambda-packaging/dev/1704776704478-2024-01-09T05:05:04.478Z",
+    "artifactDirectoryName": "serverless/lambda-packaging/dev/1704817743383-2024-01-09T16:29:03.383Z",
     "artifact": ""
   }
 }

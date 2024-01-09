@@ -1,3 +1,9 @@
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/../src/common"
+  output_path = "${path.module}/../lambda_function.zip"
+}
+
 resource "aws_lambda_function" "ddb_stream_processor" {
   function_name = "core_reso_stream_processor"
   handler       = "index.handler"
@@ -5,7 +11,9 @@ resource "aws_lambda_function" "ddb_stream_processor" {
   role          = aws_iam_role.lambda_role.arn
 
   // Assume you have a ZIP file with your Lambda code
-  filename      = "${path.module}/../.serverless/myLambdaFunction.zip"
+  filename         = data.archive_file.lambda_zip.output_path
+  source_code_hash = filebase64sha256(data.archive_file.lambda_zip.output_path)
+
 }
 
 resource "aws_iam_role" "lambda_role" {
