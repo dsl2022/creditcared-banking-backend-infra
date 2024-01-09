@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "ddb_stream_processor" {
-  function_name = "ddb_stream_processor"
+  function_name = "core_resolver_stream_processor"
   handler       = "index.handler"
   runtime       = "nodejs16.x"
   role          = aws_iam_role.lambda_role.arn
@@ -9,7 +9,7 @@ resource "aws_lambda_function" "ddb_stream_processor" {
 }
 
 resource "aws_iam_role" "lambda_role" {
-  name = "core_common_resolver_role"
+  name = "core_common_res_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",

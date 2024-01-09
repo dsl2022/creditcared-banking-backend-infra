@@ -54,10 +54,10 @@ jobs:
         run: |
           set -eux
           terraform init -upgrade -reconfigure \
-            -backend-config='region=${{ env.AWS_REGION }}' \
-            -backend-config='bucket=${{ env.BACKEND_S3_BUCKET }}' \
+            -backend-config='region=us-east-1' \
+            -backend-config='bucket=2024-terraform-backend' \
             -backend-config='key=appsync-project/terraform.tfstate' \
-            -backend-config='dynamodb_table=${{ env.BACKEND_DYNAMODB_TABLE }}'
+            -backend-config='dynamodb_table=terraform-backend-ddb'
         working-directory: .terraform
 
       - name: Terraform Apply
