@@ -5,7 +5,7 @@ resource "aws_lambda_function" "ddb_stream_processor" {
   role          = aws_iam_role.lambda_role.arn
 
   // Assume you have a ZIP file with your Lambda code
-  filename      = file("${path.module}/../.serverless/myLambdaFunction.zip")
+  filename      = "${path.module}/../.serverless/myLambdaFunction.zip"
 }
 
 resource "aws_iam_role" "lambda_role" {
