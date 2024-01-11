@@ -2,6 +2,36 @@ type Query {
   hello: String
 }
 
+type Mutation {
+  applyForCreditCard(input: CreditCardApplicationInput!): CreditCardApplicationResponse
+}
+
+input CreditCardApplicationInput {
+  accountToken: String!
+  fullName: String!
+  dateOfBirth: String! # Format: YYYY-MM-DD
+  socialSecurityNumber: String!
+  annualIncome: String!
+  employmentStatus: String!
+  address: AddressInput!
+  email: AWSEmail!
+  phoneNumber: AWSPhone!
+}
+
+input AddressInput {
+  street: String!
+  city: String!
+  state: String!
+  zipCode: String!
+}
+
+type CreditCardApplicationResponse {
+  success: Boolean!
+  message: String
+  applicationId: String
+}
+
 schema {
   query: Query
+  mutation: Mutation
 }
