@@ -34,7 +34,9 @@ resource "aws_iam_role_policy" "lambda_logging" {
         Action = [
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
-          "logs:PutLogEvents"
+          "logs:PutLogEvents",
+          "sqs:*",
+          "dyamodb:*"
         ],
         Effect = "Allow",
         Resource = "arn:aws:logs:*:*:*"
