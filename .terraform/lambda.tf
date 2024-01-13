@@ -32,3 +32,26 @@ resource "aws_iam_role" "lambda_role" {
     ],
   })
 }
+
+resource "aws_iam_role_policy" "lambda_logging" {
+  role   = aws_iam_role.lambda_role.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        Effect = "Allow",
+        Resource = "arn:aws:logs:*:*:*"
+      },
+    ]
+  })
+}
+
+resource "aws_cloudwatch_log_group" "lambda_stream_processor_log_group" {
+  name = "/aws/lambda/${aws_lambda_function.ddb_stream_processor.function_name}"
+  retention_in_days = 14
+}
