@@ -1,3 +1,22 @@
+#IAM Role for lambdas
+resource "aws_iam_role" "lambda_role" {
+  name = "core_common_reso_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        },
+      },
+    ],
+  })
+}
+
+
 # IAM Role for AppSync
 resource "aws_iam_role" "appsync_iam_role" {
   name = "core-appsync-access-role"
