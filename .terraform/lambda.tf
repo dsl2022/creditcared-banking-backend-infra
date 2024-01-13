@@ -30,7 +30,7 @@ resource "aws_cloudwatch_log_group" "lambda_stream_processor_log_group" {
   retention_in_days = 14
 }
 
-resource "aws_cloudwatch_log_group" "lambda_stream_processor_log_group" {
+resource "aws_cloudwatch_log_group" "core_ddb_failed_stream_processor_log_group" {
   name = "/aws/lambda/${aws_lambda_function.core_ddb_failed_stream_processor.function_name}"
   retention_in_days = 14
 }
