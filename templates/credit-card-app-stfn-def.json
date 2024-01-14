@@ -7,7 +7,7 @@
         "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
         "Parameters": {
           "QueueUrl": "https://sqs.region.amazonaws.com/account-id/ValidateApplicationQueue",
-          "Message": {
+          "MessageBody": {
             "Input.$": "$",
             "TaskToken.$": "$$.Task.Token"
           }
@@ -19,7 +19,7 @@
         "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
         "Parameters": {
           "QueueUrl": "https://sqs.region.amazonaws.com/account-id/CheckIdentityQueue",
-          "Message": {
+          "MessageBody": {
             "Input.$": "$",
             "TaskToken.$": "$$.Task.Token"
           }
@@ -31,7 +31,7 @@
         "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
         "Parameters": {
           "QueueUrl": "https://sqs.region.amazonaws.com/account-id/CheckCreditScoreQueue",
-          "Message": {
+          "MessageBody": {
             "Input.$": "$",
             "TaskToken.$": "$$.Task.Token"
           }
@@ -43,7 +43,7 @@
         "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
         "Parameters": {
           "QueueUrl": "https://sqs.region.amazonaws.com/account-id/DecisioningQueue",
-          "Message": {
+          "MessageBody": {
             "Input.$": "$",
             "TaskToken.$": "$$.Task.Token"
           }
@@ -55,7 +55,7 @@
         "Resource": "arn:aws:states:::sqs:sendMessage.waitForTaskToken",
         "Parameters": {
           "QueueUrl": "https://sqs.region.amazonaws.com/account-id/NotifyApplicantQueue",
-          "Message": {
+          "MessageBody": {
             "Input.$": "$",
             "TaskToken.$": "$$.Task.Token"
           }
