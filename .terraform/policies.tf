@@ -86,3 +86,30 @@ resource "aws_iam_role_policy_attachment" "lambda_dynamodb_attachment" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.lambda_dynamodb_policy.arn
 }
+
+# step function role
+resource "aws_iam_role_policy" "step_function_policy" {
+  name   = "step_function_execution_policy"
+  role   = aws_iam_role.step_function_role.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "sqs:SendMessage",
+          "sqs:GetQueueAttributes"
+        ],
+        Effect = "Allow",
+        Resource = "*"
+      },
+      {
+        Action = [
+          "states:SendTaskSuccess",
+          "states:SendTaskFailure"
+        ],
+        Effect = "Allow",
+        Resource = "*"
+      }
+    ]
+  })
+}
