@@ -1,5 +1,66 @@
-resource "aws_sqs_queue" "sqs_queue" {
-  name = "example-sqs-queue"
+resource "aws_sqs_queue" "validate-application" {
+  name = "validate-application"
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = "${aws_sqs_queue.validate-application-dlq.arn}"
+    maxReceiveCount     = 5 // Adjust based on your requirement
+  })
+  // Additional SQS configurations...
+}
+
+resource "aws_sqs_queue" "validate-application-dlq" {
+  name = "validate-application-dlq"
+}
+
+resource "aws_sqs_queue" "check-identity" {
+  name = "check-identity"
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = "${aws_sqs_queue.check-identity-dlq.arn}"
+    maxReceiveCount     = 5 // Adjust based on your requirement
+  })
+  // Additional SQS configurations...
+}
+
+resource "aws_sqs_queue" "check-identity-dlq" {
+  name = "check-identity-dlq"
+}
+
+resource "aws_sqs_queue" "check-credit-score" {
+  name = "check-credit-score"
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = "${aws_sqs_queue.check-credit-score-dlq.arn}"
+    maxReceiveCount     = 5 // Adjust based on your requirement
+  })
+  // Additional SQS configurations...
+}
+
+resource "aws_sqs_queue" "check-credit-score-dlq" {
+  name = "check-credit-score-dlq"
+}
+
+resource "aws_sqs_queue" "decisioning" {
+  name = "decisioning"
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = "${aws_sqs_queue.decisioning-dlq.arn}"
+    maxReceiveCount     = 5 // Adjust based on your requirement
+  })
+  // Additional SQS configurations...
+}
+
+resource "aws_sqs_queue" "decisioning-dlq" {
+  name = "decisioning-dlq"
+}
+
+resource "aws_sqs_queue" "notify-applicant" {
+  name = "notify-applicant"
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = "${aws_sqs_queue.notify-applicant-dlq.arn}"
+    maxReceiveCount     = 5 // Adjust based on your requirement
+  })
+  // Additional SQS configurations...
+}
+
+resource "aws_sqs_queue" "notify-applicant-dlq" {
+  name = "notify-applicant-dlq"
 }
 
 resource "aws_sqs_queue" "stream-on-failure" {
